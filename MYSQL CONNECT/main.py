@@ -4,7 +4,7 @@ from mysql.connector import errorcode
 
 
 cnx = mysql.connector.connect(user='root',password='mysql',
-                              database='student',host='127.0.0.1' )
+                              host='127.0.0.1',database='student')
 
 
 e = cnx.cursor()
@@ -15,7 +15,7 @@ e = cnx.cursor()
 v=int(input("ENTER THE SERIAL NUMBER\n 1.Add Student\n 2.Show List\n"))
 
 if v==1:
-  a="Army Public School,Bolarum"
+  
   b=input("Enter Student Name: ")
   c=int(input("Enter Student RollNo: "))
   d=input("Enter Student Class: ")
@@ -33,9 +33,15 @@ if v==1:
   e.execute(add_student,studentdata)
   cnx.commit()
 elif v==2:
-  a=int(input("Enter the student Rollno: "))
-  query = ("SELECT * FROM Student WHERE Rollno = %s")
-  e.execute(query,(a,))
+  j=int(input("Enter the student Rollno: "))
+  query = (f"SELECT * FROM Student WHERE Rollno = {j}")
+  a="Army Public School Bolarum"
+
+  e.execute(query)
+  for (name,Rollno,Class,Sec,Address,City,Pin,Pc) in e:
+    # print(f"{name} {Rollno} {Class} {Sec} {Address} {City} {Pin} {Pc}")
+    print(f"\t  {a}\nName: {name}\t\t Class: {Class} {Sec}\nAddress: {Address}\nContact: {Pc}")
+
 
 
 
