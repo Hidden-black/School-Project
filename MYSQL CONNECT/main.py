@@ -1,5 +1,15 @@
+import pip
+
+def import_or_install(package):
+    try:
+        __import__(package)
+    except ImportError:
+        pip.main(['install', package])    
+
+
 import mysql.connector
 from mysql.connector import errorcode
+
 
 
 cnx = mysql.connector.connect(user='root',password='mysql',
@@ -42,12 +52,6 @@ elif v==2:
   for (adm_no,name,Rollno,Class,Sec,Address,City,Pin,Pc) in e:
     # print(f"{name} {Rollno} {Class} {Sec} {Address} {City} {Pin} {Pc}")
     print(f"\t  {a}\nName: {name}\t\t Class: {Class} {Sec} /{Rollno}\nAddress: {Address}\nContact: {Pc}\tAdm No.: {adm_no}")
-
-
-
-
-
-
-
+    
 
 cnx.close()
